@@ -2,38 +2,59 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
 
+import 'package:m3space/Persistence/MeasurementRepository.dart';
+import 'package:m3space/Persistence/Models/DataRecord.dart';
+
 class SquareGame extends StatefulWidget{
-  const SquareGame (this.toInputScreen,{super.key});
+  SquareGame (this.toInputScreen,{super.key});
   final void Function() toInputScreen;
 
   @override
   State<SquareGame> createState(){
-    return _SquareGameState();
-  }
+      return _SquareGameState();
+    }
+
   }
 
   class _SquareGameState extends State<SquareGame>{
 
-  void countingTime() {
-  Timer.periodic(const Duration(seconds: 1), (timer) {
-    if (rollTimeDuration > -2) {
-      setState(() {
-        rollTimeDuration--;
-        initialSquareTime++;
-      });
-    } else {
-      timer.cancel();
-      Navigator.pushNamed(context, '/square-input');
-      initialSquareTime -= 2;
-      rollTimeDuration = initialSquareTime;
+    final repository = MeasurementRepository.instance;
+
+    void addMeasurement(DataRecord record){
+      repository.addDataRecord(record);
     }
-  });
-}
+
+    void countingTime() {
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (rollTimeDuration > -2) {
+          setState(() {
+            rollTimeDuration--;
+            initialSquareTime++;
+          });
+        } else {
+          timer.cancel();
+          Navigator.pushNamed(context, '/square-input');
+          initialSquareTime -= 2;
+          rollTimeDuration = initialSquareTime;
+        }
+      });
+    }
 
     @override
     void initState(){
       super.initState();
       countingTime();
+
+      // przykladowe uzycie ISAR
+      // UWAGA: ISAR musi mieć czas na inicjalizację bazy danych, to operacja asynchroniczna, więc troche trwa.
+      // Dlatego inicjalizujemy repozytorium już w menu głównym, żeby mieć pewność, że baza danych jest gotowa do użycia.
+
+      var record = DataRecord(userName: "Mateusz",
+          desiredTimeCount: 10,
+          guessedTimeCount: 8,
+          recordDate: DateTime.now());
+
+      addMeasurement(record);
     }
 
     @override

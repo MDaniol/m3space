@@ -9,13 +9,28 @@ import 'package:m3space/Theme/M3SpaceTheme.dart';
 import 'package:m3space/main_screen.dart';
 import 'package:m3space/start_screen.dart';
 
+import 'package:m3space/Persistence/MeasurementRepository.dart';
 
+class M3space extends StatefulWidget {
+  const M3space({Key? key}) : super(key: key);
 
-class M3space extends StatelessWidget {
-  const M3space({super.key});
+  @override
+  _M3spaceState createState() => _M3spaceState();
+}
+
+class _M3spaceState extends State<M3space> {
+  late MeasurementRepository repository;
+
+  @override
+  void initState() {
+    super.initState();
+    repository = MeasurementRepository.instance;
+    // Tu inicjujemy instancję repozytorium bazy danych, której będziemy używać później.
+    // To ekstremalnie ważne, żeby ją przygotować wcześniej, bo jej inizjaclizacja zajmuje trochę czasu.
+  }
 
   void function() {
-    return null;
+    return null; // do nothing, ta funkcja jest tylko po to, abym nie musiał zmieniać wszystkich klas - nie chciało mi się :)
   }
 
   // Cała nawigacja poniżej. Działa na zasadzie przekierowywania na kolejne ekrany.
@@ -43,115 +58,3 @@ class M3space extends StatelessWidget {
     );
   }
 }
-
-
-//
-// class M3space extends StatefulWidget{
-//   const M3space({super.key});
-//
-//   @override
-//   State<M3space> createState() {
-//     return _M3Space();
-//   }
-// }
-// class _M3Space extends State<M3space>{
-//
-//   var activeScreen = 'start-screen';
-//
-//   void switchScreen() {
-//     setState(() {
-//       activeScreen = 'main-screen';
-//     });
-//   }
-//
-//   void switchSquareRules() {
-//     setState(() {
-//       activeScreen = 'square-rules';
-//     });
-//   }
-//
-//   void switchSquareGame(){
-//     setState(() {
-//       activeScreen = 'square-game';
-//     });
-//   }
-//
-//   void switchSquareInput(){
-//     if(rollTimeDuration == -2){
-//     setState(() {
-//       activeScreen = 'square-input';
-//     });}
-//   }
-//
-//   void switchSquareResult(){
-//     setState(() {
-//       activeScreen = 'square-result';
-//     });
-//   }
-//
-//   void switchToDataStorage(){
-//     setState(() {
-//       activeScreen = 'data-storage';
-//     });
-//   }
-//
-//   void switchToSquareGameData(){
-//     setState(() {
-//       activeScreen = 'square-game-data';
-//     });
-//   }
-//
-//   @override
-//   Widget build(context) {
-//
-//     Widget screenWidget = StartScreen(switchScreen);
-//
-//     if (activeScreen == 'main-screen') {
-//       screenWidget =  MainScreen(switchToDataStorage);
-//       // Zmieniaj pomiędzy MainScreen(switchSquareRules); MainScreen(switchToDataStorage);
-//     }
-//
-//     if (activeScreen == 'square-rules') {
-//       screenWidget = SqurareRules(switchSquareGame);
-//     }
-//
-//     if(activeScreen == 'square-game'){
-//       screenWidget = SquareGame(switchSquareInput);
-//     }
-//
-//     if(activeScreen == 'square-input'){
-//       screenWidget = SquareInput(switchSquareResult);
-//     }
-//
-//     if(activeScreen == 'square-result'){
-//       screenWidget = SquareResult(switchScreen);
-//     }
-//
-//     if(activeScreen == 'data-storage'){
-//       screenWidget = DataStorage(switchToSquareGameData);
-//     }
-//
-//     if(activeScreen == 'square-game-data'){
-//       screenWidget = const DataSquareGame();
-//     }
-//
-//     return MaterialApp(
-//       home: Scaffold(
-//         body: Container(
-//           decoration: const BoxDecoration(
-//             gradient: LinearGradient(
-//               colors: [
-//                 Color.fromARGB(255, 15, 8, 217),
-//                 Color.fromARGB(255, 7, 162, 233)
-//               ],
-//               begin: Alignment.topLeft,
-//               end: Alignment.bottomRight,
-//             ),
-//           ),
-//           child: screenWidget,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
