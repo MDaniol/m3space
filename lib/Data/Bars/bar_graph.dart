@@ -8,6 +8,8 @@ class BarGraph extends StatelessWidget{
   const BarGraph({super.key, required this.allDaysSummary});
   final List allDaysSummary;
 
+  // Wizualizację zrobiłbym używając którychś z paczek tutaj: https://fluttergems.dev/plots-visualization/
+
   @override
   Widget build(BuildContext context) {
     BarData myBarData = BarData(dayOne: allDaysSummary[0], 

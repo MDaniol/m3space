@@ -6,28 +6,30 @@ class MainScreen extends StatelessWidget{
   
   @override
   Widget build(context){
-    return  Center (
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-        //Data Button
-        OutlinedButton.icon(onPressed: () {onSelectedCategory();}, 
-        style: OutlinedButton.styleFrom(
-          foregroundColor:const Color.fromARGB(224, 0, 8, 17)
+    return  Scaffold (
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Main Screen', style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),),
+            const SizedBox(height: 80,),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/square-rules');
+              },
+              child: const Text('Square Game'),
+            ),
+            const SizedBox(height: 20,),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/data-storage');
+              },
+              child: const Text('Data Storage'),
+            ),
+          ],
         ),
-        icon: const Icon(Icons.backup_sharp),
-        label: const Text('Data Storage'),),
-
-        const SizedBox(height: 30,),
-
-        OutlinedButton.icon(onPressed: () {onSelectedCategory();}, 
-        style: OutlinedButton.styleFrom(
-          foregroundColor:const Color.fromARGB(224, 0, 8, 17)
-        ),
-        icon: const Icon(Icons.square),
-        label: const Text('Square Game'),),
-      ],) 
-      );  
+      ),
+    );
   }
   }
   

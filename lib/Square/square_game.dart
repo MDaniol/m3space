@@ -23,7 +23,7 @@ class SquareGame extends StatefulWidget{
       });
     } else {
       timer.cancel();
-      widget.toInputScreen();
+      Navigator.pushNamed(context, '/square-input');
       initialSquareTime -= 2;
       rollTimeDuration = initialSquareTime;
     }
@@ -31,7 +31,6 @@ class SquareGame extends StatefulWidget{
 }
 
     @override
-
     void initState(){
       super.initState();
       countingTime();
@@ -41,16 +40,6 @@ class SquareGame extends StatefulWidget{
     Widget build(context){
       return Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 15, 8, 217),
-                  Color.fromARGB(255, 7, 162, 233)
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight
-              ),
-            ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
